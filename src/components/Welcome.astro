@@ -1,6 +1,10 @@
 ---
-import astroLogo from "../assets/astro.svg";
-import background from "../assets/background.svg";
+import { getCollection } from "astro:content";
+
+const books = await getCollection("books");
+
+console.log(books[0].slug);
+
 ---
 
 <main>
@@ -9,3 +13,22 @@ import background from "../assets/background.svg";
 		<span class="block">Books</span>
 	</h1>
 </main>
+
+<section aria-label="Libros recomendados para programadores">
+	<div class="px-4 mx-auto max-w-screen-xl">
+		<div class="grid gap-6 md:grid-cols-2">
+			{
+				books.map((book) => {
+					const { slug, data } = book;
+					const { title, author, img, pubDate, readtime, description, buy } = data;
+					return (
+						<article>
+							<h2 class="text-2xl font-bold">{title}</h2>
+							<p class="text-gray-600">{author}</p>
+						</article>
+					);
+				})
+			}
+		</div>
+	</div>
+</section>
