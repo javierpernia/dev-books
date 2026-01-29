@@ -1,7 +1,7 @@
 ---
 title: La teoría Let Them
 author: Miguel Durán García
-img: aprendiendo-git.jpg
+img: learning-typescript.jpg
 pubDate: 2026-01-21
 readtime: 224
 description: "La teoría Let Them. La clave está en soltar: El método que te puede cambiar la vida y del que millones de personas no dejan de hablar."
