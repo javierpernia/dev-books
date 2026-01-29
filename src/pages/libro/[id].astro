@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { SHOW_BUY_BUTTON } from "astro:env/server";
 import Layout from "../../layouts/Layout.astro";
+import BookScore from "../../components/BookScore.astro";
 
 export async function getStaticPaths() {
   const books = await getCollection("books");
@@ -16,6 +17,8 @@ const { data, slug } = book;
 const { title, author, img, pubDate, readtime, description, buy } = data;
 
 const { Content } = await render(book);
+
+export const prerender = true;
 ---
 
 <Layout title={`${title} - Dev Books`}>
@@ -28,6 +31,12 @@ const { Content } = await render(book);
         src={`/src/assets/${img}`}
         alt={title}
       />
+      <BookScore server:defer id={slug}>
+        <span slot="fallback" class="text-xs opacity-70">
+          Cargando puntuación...
+        </span>
+      </BookScore>
+
       {
         SHOW_BUY_BUTTON && (
           <a
