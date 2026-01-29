@@ -11,7 +11,8 @@ export async function getStaticPaths() {
 }
 
 const { book } = Astro.props;
-const { title, author, img, pubDate, readtime, description, buy } = book.data;
+const { data, slug } = book;
+const { title, author, img, pubDate, readtime, description, buy } = data;
 
 const { Content } = await render(book);
 ---
@@ -19,7 +20,13 @@ const { Content } = await render(book);
 <Layout title={`${title} - Dev Books`}>
   <div class="flex gap-12">
     <aside class="flex flex-col items-center gap-4">
-      <img class="rounded w-72 h-auto" src={`/src/assets/${img}`} alt={title} />
+      <a href="/" class="hover:underline">⬅ Volver</a>
+      <img
+        transition:name={`img-${slug}`}
+        class="rounded w-72 h-auto"
+        src={`/src/assets/${img}`}
+        alt={title}
+      />
       <!-- enlace para comprar -->
     </aside>
     <main class="max-w-3xl">
