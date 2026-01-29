@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { SHOW_BUY_BUTTON } from "astro:env/server";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -27,7 +28,19 @@ const { Content } = await render(book);
         src={`/src/assets/${img}`}
         alt={title}
       />
-      <!-- enlace para comprar -->
+      {
+        SHOW_BUY_BUTTON && (
+          <a
+            href={buy.spain}
+            title="Comprar Libro"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-balance inline-flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black px-4 py-2 rounded-lg border border-yellow-500 transition duration-200 ease-in-out hover:scale-105 justify-center text-center w-full"
+          >
+            Comprar
+          </a>
+        )
+      }
     </aside>
     <main class="max-w-3xl">
       <h1 class="text-4xl font-bold mb-4">{title}</h1>
