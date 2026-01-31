@@ -1,0 +1,22 @@
+---
+const SPAIN = "ES";
+const USA = "US";
+
+const country = Astro.request.headers.get("X-Vercel-IP-Country") ?? "ES";
+
+const storeCountry = country === SPAIN ? "spain" : "us";
+const countryName = country === SPAIN ? "España" : "EE. UU.";
+
+const { buy } = Astro.props;
+const url = buy[storeCountry];
+---
+
+<a
+  href={url}
+  title="Comprar Libro"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="text-balance inline-flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black px-4 py-2 rounded-lg border border-yellow-500 transition duration-200 ease-in-out hover:scale-105 justify-center text-center w-full"
+>
+  Comprar en {countryName}
+</a>
